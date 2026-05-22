@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rea Kalampaliki | Bioinformatician portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-teal: #0ea5e9;
+            --accent-green: #10b981;
+            --border-color: #334155;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-code: 'Fira Code', 'Courier New', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Sticky Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-family: var(--font-code);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--accent-teal);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a:hover {
+            color: var(--accent-teal);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: var(--accent-teal);
+            font-size: 1.4rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            padding: 7rem 0 5rem 0;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-teal);
+            font-family: var(--font-code);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-bio {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .btn-icon {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .btn-icon:hover {
+            color: var(--accent-teal);
+        }
+
+        .hero-avatar-container {
+            position: relative;
+        }
+
+        .hero-avatar {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--border-color);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Technical Matrix Style */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .skill-card h3 {
+            font-family: var(--font-code);
+            font-size: 1rem;
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background-color: rgba(51, 65, 85, 0.5);
+            border: 1px solid var(--border-color);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+        }
+
+        /* Timeline / Experience Layout */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent-teal);
+        }
+
+        .timeline-item::after {
+            content: "";
+            position: absolute;
+            left: 5px;
+            top: 22px;
+            width: 2px;
+            height: calc(100% + 1.5rem);
+            background-color: var(--border-color);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .time-meta {
+            font-family: var(--font-code);
+            color: var(--accent-teal);
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .job-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .institution {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-body ul {
+            list-style: none;
+        }
+
+        .timeline-body li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .timeline-body li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+        }
+
+        /* Project Cards */
+        .project-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .proj-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .proj-header i.folder {
+            font-size: 2rem;
+            color: var(--accent-teal);
+        }
+
+        .proj-links a {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-left: 0.75rem;
+        }
+
+        .proj-links a:hover {
+            color: var(--accent-teal);
+        }
+
+        .project-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        /* Publications List */
+        .pub-card {
+            background-color: rgba(30, 41, 59, 0.4);
+            border-left: 4px solid var(--accent-teal);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .pub-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .pub-authors {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .pub-authors span.me {
+            color: var(--text-primary);
+            text-decoration: underline;
+        }
+
+        .pub-venue {
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .pub-metrics {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            font-family: var(--font-code);
+        }
+
+        .metric-badge {
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--accent-teal);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .pub-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-sm {
+            font-family: var(--font-code);
+            font-size: 0.8rem;
+            border: 1px solid var(--border-color);
+            padding: 0.3rem 0.75rem;
+            border-radius: 4px;
+        }
+
+        .btn-sm:hover {
+            border-color: var(--accent-teal);
+            color: var(--accent-teal);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsive Mechanics */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 2rem;
+                padding: 4rem 0;
+            }
+            .hero-bio {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-links {
+                justify-content: center;
+            }
+            nav ul {
+                display: none; /* Simplification for code brevity */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo">rea.kalampaliki()</div>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#projects">Work &amp; Hacks</a></li>
+                    <li><a href="#publications">Research</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="hero" id="about">
+            <div class="hero-content">
+                <h1 class="hero-title">Rea Kalampaliki</h1>
+                <div class="hero-subtitle">Bioinformatician</div>
+                <p class="hero-bio">
+                    Bioinformatician with 3-year hands-on research experience in machine learning, RNA biology and structural bioinformatics[cite: 5]. Skilled in modeling biological datasets and building scalable bioinformatics pipelines with Python, Bash and Nextflow[cite: 6].
+                </p>
+                <div class="hero-links">
+                    <a href="mailto:r.kalampaliki@gmail.com" class="btn-icon" title="Email"><i class="fa-regular fa-envelope"></i></a>
+                    <a href="https://linkedin.com/in/rea-kalampaliki" target="_blank" class="btn-icon" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://github.com/ReaKal" target="_blank" class="btn-icon" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="btn-sm" style="margin-left: auto;"><i class="fa-regular fa-file-pdf"></i> Download CV</a>
+                </div>
+            </div>
+            <div class="hero-avatar-container">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%231e293b'><circle cx='50' cy='35' r='20' fill='%2394a3b8'/><path d='M10 85 C10 60, 90 60, 90 85 Z' fill='%2394a3b8'/></svg>" class="hero-avatar" alt="Rea Kalampaliki">
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title"><i class="fa-solid fa-layer-group"></i> Technical Bio-Stack</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3><i class="fa-solid fa-code"></i> Programming</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Bash</span>
+                        <span class="tag">R</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3><i class="fa-solid fa-brain"></i> Machine Learning / AI</h3>
+                    <div class="skill-tags">
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">Keras</span>
+                        <span class="tag">scikit-learn</span>
+                        <span class="tag">optuna</span>
+                        <span class="tag">Diffusion Models</span>
+                        <span class="tag">Agentic AI</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3><i class="fa-solid fa-dna"></i> Bioinformatics</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Nextflow</span>
+                        <span class="tag">Biopython</span>
+                        <span class="tag">rna-tools</span>
+                        <span class="tag">GATK</span>
+                        <span class="tag">BCFtools</span>
+                        <span class="tag">BEDtools</span>
+                        <span class="tag">DESeq2/R</span>
+                        <span class="tag">Seurat/R</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3><i class="fa-solid fa-terminal"></i> Infrastructure</h3>
+                    <div class="skill-tags">
+                        <span class="tag">Docker</span>
+                        <span class="tag">Git</span>
+                        <span class="tag">Slurm (HPC)</span>
+                        <span class="tag">Ansible</span>
+                        <span class="tag">Prometheus/Grafana</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Research Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="time-meta">Oct 2022 - Aug 2025</div>
+                    <h3 class="job-title">Bioinformatics Research Assistant</h3>
+                    <div class="institution">BSRC "Alexander Fleming" - Computational Biology Lab, Athens | Supervisor: Prof. Martin Reczko</div>
+                    <div class="timeline-body">
+                        <ul>
+                            <li>Developed machine learning models for RMSD estimation of RNA structures[cite: 10, 40].</li>
+                            <li>Deployed machine learning models on a Flask-based web service for RNA 3D prediction and scoring[cite: 11, 41].</li>
+                            <li>Developed a full Nextflow pipeline for RNA 3D modeling and competed in the global RNA-Puzzles challenge[cite: 12, 42].</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 2rem;"><i class="fa-solid fa-graduation-cap"></i> Education</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="time-meta">2020 - 2022</div>
+                    <h3 class="job-title">MSc in Data Science, Specialization in Bioinformatics</h3>
+                    <div class="institution">National and Kapodistrian University of Athens</div>
+                    <div class="timeline-body">
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">Grade: 9.41/10 (Excellent) — Recipient of the Admission Scholarship[cite: 22, 49].</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time-meta">2015 - 2020</div>
+                    <h3 class="job-title">Integrated Master in Biotechnology</h3>
+                    <div class="institution">Agricultural University of Athens</div>
+                    <div class="timeline-body">
+                        <p style="color: var(--text-secondary); font-size: 0.95rem;">Grade: 8.66 / 10 (Excellent)[cite: 21, 48]. Specialization in Applied Biology &amp; Biotechnology[cite: 21, 48].</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title"><i class="fa-solid fa-code-branch"></i> Selected Work &amp; Contributions</h2>
+            <div class="project-cards">
+                <div class="project-card">
+                    <div>
+                        <div class="proj-header">
+                            <i class="folder fa-regular fa-folder-open"></i>
+                            <div class="proj-links">
+                                <a href="https://github.com/ReaKal" target="_blank"><i class="fa-brands fa-github"></i></a>
+                            </div>
+                        </div>
+                        <h3>RNA 3D Nextflow Pipeline</h3>
+                        <p>Developed a scalable computational Nextflow pipeline engineered for predictive automated execution pipelines during the structural community evaluation challenge RNA-Puzzles[cite: 12, 42].</p>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="tag">Nextflow</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">rna-tools</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div>
+                        <div class="proj-header">
+                            <i class="folder fa-solid fa-network-wired"></i>
+                            <div class="proj-links">
+                                <a href="#" target="_blank"><i class="fa-solid fa-terminal"></i></a>
+                            </div>
+                        </div>
+                        <h3>nf-core/proteinfamilies</h3>
+                        <p>Contributed robust integration module unit testing layers for the large-scale protein family sequence query processing architectural suite under open-source communities framework[cite: 30, 60].</p>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="tag">Nextflow</span>
+                        <span class="tag">nf-core</span>
+                        <span class="tag">CI/CD</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div>
+                        <div class="proj-header">
+                            <i class="folder fa-solid fa-biohazard"></i>
+                            <div class="proj-links">
+                                <a href="#" target="_blank"><i class="fa-solid fa-link"></i></a>
+                            </div>
+                        </div>
+                        <h3>ELIXIR BioHackathon 2024</h3>
+                        <p>Evaluated and structured an automated framework optimizing the Croissant machine learning structural metadata format parser metrics across Kaggle &amp; Hugging Face targets to improve FAIR accessibility parameters[cite: 29, 59].</p>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="tag">Croissant ML</span>
+                        <span class="tag">Metadata Standards</span>
+                        <span class="tag">FAIR Data</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="publications">
+            <h2 class="section-title"><i class="fa-solid fa-book-bookmark"></i> Peer-Reviewed Publications &amp; Talks</h2>
+            
+            <div class="pub-card">
+                <div class="pub-title">A Root Mean Square Deviation Estimation Algorithm (REA) and its use for improved RNA Structure Prediction [cite: 13, 44]</div>
+                <div class="pub-authors"><span class="me">Kalampaliki R</span>, et al. [cite: 13, 44]</div>
+                <div class="pub-venue">bioRxiv Preprint (2024) [cite: 14, 44]</div>
+                <div class="pub-metrics">
+                    <span class="metric-badge"><i class="fa-regular fa-eye"></i> 1,200+ Abstract Views [cite: 14, 45]</span>
+                    <span class="metric-badge"><i class="fa-solid fa-download"></i> 840+ Full-text Reads [cite: 14, 45]</span>
+                </div>
+                <div class="pub-actions">
+                    <a href="https://doi.org/" target="_blank" class="btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> bioRxiv</a>
+                    <a href="#" class="btn-sm"><i class="fa-solid fa-code"></i> Code base</a>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h3 style="font-size: 1.1rem; margin-bottom: 1rem;"><i class="fa-solid fa-microphone-lines" style="color:var(--accent-green)"></i> Presentations</h3>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin-bottom: 0.75rem; color: var(--text-secondary);">
+                        <strong style="color:var(--text-primary)">Oral Presentation:</strong> Hellenic Pasteur Institute Young Scientists Conference (2024)[cite: 46].
+                    </li>
+                    <li style="margin-bottom: 0.75rem; color: var(--text-secondary);">
+                        <strong style="color:var(--text-primary)">Poster Session:</strong> ELIXIR-GR All Hands Meeting (2025)[cite: 46].
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Rea Kalampaliki. Built with utility, performance, and scientific clarity in mind.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
